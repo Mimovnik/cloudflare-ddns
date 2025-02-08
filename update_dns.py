@@ -86,10 +86,12 @@ if __name__ == '__main__':
     
     while True:
         current_ip = get_public_ip()
+        logging.info(f"Current public ip is {current_ip}")
         if current_ip and current_ip != last_ip:
             if update_dns_record(current_ip):
                 last_ip = current_ip
             else:
                 logging.error("Failed to update DNS record")
         
+        logging.info(f"Sleeping for {check_interval} seconds...")
         time.sleep(check_interval)
